@@ -1,6 +1,7 @@
 package org.example.models;
 
 import jakarta.persistence.*;
+import lombok.*;
 import org.example.models.Mission.Mission;
 import org.example.models.Staff.Giudice;
 import org.example.models.Staff.Mentore;
@@ -11,7 +12,11 @@ import org.example.util.State;
 import java.time.LocalDateTime;
 import java.util.Set;
 
-
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 @Entity
 public class Hackathon {
 
@@ -19,27 +24,40 @@ public class Hackathon {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    private String nome;
+    private String argomento;
     private String regolamento;
+    private String luogoEvento;
+    private Double premio;
+
     private LocalDateTime scadenzaIscrizioni;
     private LocalDateTime dataInizio;
     private LocalDateTime dataFine;
+    //Data inizio e fine valutazione?
+
     private State stato;
-    private String luogoEvento;
-    private Double premio;
+
     private Integer capienzaMax;
     private Integer capienzaMin;
     @ManyToOne
+    @JoinColumn(name = "giudice_id")
     private Giudice giudice;
-    @ManyToMany
-    private Set<Mentore> mentori;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "hackathon_mentore",
+            joinColumns = @JoinColumn(name = "hackathon_id"),
+            inverseJoinColumns = @JoinColumn(name = "mentore_id")
+    )
+    private Set<Mentore> mentore;
     @ManyToOne
+    @JoinColumn(name = "organizzatore_id")
     private Organizzatore organizzatore;
     @ManyToOne
+    @JoinColumn(name = "team_vincitore_id")
     private Team vincitore;
-    private String argomento;
-    @OneToMany
-    private Set<Mission> sottoMissioni;
+
+    @OneToMany(mappedBy = "hackathon", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Mission> sottoMissione;
 
 
 

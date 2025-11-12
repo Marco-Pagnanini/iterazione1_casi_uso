@@ -1,12 +1,14 @@
 package org.example.models.Mission;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import org.example.models.Hackathon;
 
 import java.time.LocalDateTime;
 
+@Getter
+@Setter
 @Entity
 public class Mission {
     @Id
@@ -14,4 +16,8 @@ public class Mission {
     private Integer id;
     private LocalDateTime scadenza;
     private Double punteggio;
+
+    @ManyToOne
+    @JoinColumn(name = "hackathon_id")
+    private Hackathon hackathon;
 }

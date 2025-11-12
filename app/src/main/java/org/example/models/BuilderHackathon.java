@@ -20,7 +20,7 @@ public class BuilderHackathon implements HackathonBuilder {
 
     @Override
     public HackathonBuilder withName(String name) {
-        hackathon.setName(name);
+        hackathon.setNome(name);
         return this;
     }
 
@@ -86,7 +86,7 @@ public class BuilderHackathon implements HackathonBuilder {
 
     @Override
     public HackathonBuilder withMentori(Set<Mentore> mentori) {
-        hackathon.setMentori(mentori);
+        hackathon.setMentore(mentori);
         return this;
     }
 
@@ -110,7 +110,7 @@ public class BuilderHackathon implements HackathonBuilder {
 
     @Override
     public HackathonBuilder withSottoMissioni(Set<Mission> sottoMissioni) {
-        hackathon.setSottoMissioni(sottoMissioni);
+        hackathon.setSottoMissione(sottoMissioni);
         return this;
     }
 
