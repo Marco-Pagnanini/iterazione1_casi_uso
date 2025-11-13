@@ -33,7 +33,6 @@ public class Hackathon {
     private LocalDateTime scadenzaIscrizioni;
     private LocalDateTime dataInizio;
     private LocalDateTime dataFine;
-    //Data inizio e fine valutazione?
 
     private State stato;
 
